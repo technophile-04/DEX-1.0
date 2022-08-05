@@ -506,6 +506,11 @@ function App(props) {
         {FaucetHint}
       </div>
 
+      <div style={{ marginTop: 32, opacity: 0.5 }}>
+        Created by{" "}
+        <Address value={"0x55b9CB0bCf56057010b9c471e7D42d60e1111EEa"} ensProvider={mainnetProvider} fontSize={16} />
+      </div>
+
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
         <Row align="middle" gutter={[4, 4]}>
