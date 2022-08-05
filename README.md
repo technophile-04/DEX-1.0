@@ -128,7 +128,7 @@ Now when we `yarn deploy --reset` then our contract should be initialized as soo
 
 ### 🥅 Goals / Checks
 
-- [ ] 🎈 Under the debug tab, does your DEX show 5 ETH and 5 Balloons of liquidity?
+- [x] 🎈 Under the debug tab, does your DEX show 5 ETH and 5 Balloons of liquidity?
 
 ---
 
@@ -207,8 +207,8 @@ Finally, let’s say the ratio is the same but we want to swap 100,000 tokens in
 
 ### 🥅 Goals / Checks
 
-- [ ] 🤔 Do you understand how the x\*y=k price curve actually works? Write down a clear explanation for yourself and derive the formula for price. You might have to shake off some old algebra skills!
-- [ ] 💃 You should be able to go through the price section of this tutorial with the sample numbers and generate the same outputChange variable.
+- [x] 🤔 Do you understand how the x\*y=k price curve actually works? Write down a clear explanation for yourself and derive the formula for price. You might have to shake off some old algebra skills!
+- [x] 💃 You should be able to go through the price section of this tutorial with the sample numbers and generate the same outputChange variable.
 
 > 💡 _Hints:_ See this [link](https://hackernoon.com/formulas-of-uniswap-a-deep-dive), solve for the change in the Output Reserve. See the section in that link up to the uniswap v3 title.
 
@@ -315,8 +315,8 @@ Remember that you will need to call `approve()` from the `Balloons.sol` contract
 
 ### 🥅 Goals / Checks
 
-- [ ] 💧 Deposit liquidity, and then check your liquidity amount through the mapping in the debug tab. Has it changed properly? Did the right amount of assets get deposited?
-- [ ] 🧐 What happens if you `deposit()` at the beginning of the deployed contract, then another user starts swapping out for most of the balloons, and then you try to withdraw your position as a liquidity provider? Answer: you should get the amount of liquidity proportional to the ratio of assets within the isolated liquidity pool. It will not be 1:1.
+- [x] 💧 Deposit liquidity, and then check your liquidity amount through the mapping in the debug tab. Has it changed properly? Did the right amount of assets get deposited?
+- [x] 🧐 What happens if you `deposit()` at the beginning of the deployed contract, then another user starts swapping out for most of the balloons, and then you try to withdraw your position as a liquidity provider? Answer: you should get the amount of liquidity proportional to the ratio of assets within the isolated liquidity pool. It will not be 1:1.
 
 ---
 
@@ -332,7 +332,7 @@ Now, a user can just enter the amount of ETH or tokens they want to swap and the
 
 ### 🥅 Extra Challenge:
 
-- [ ] `approve()` event emission: can you implement this into the event tabs so that it is clear when `approve()` from the `Balloons.sol` contract has been executed?
+- [x] `approve()` event emission: can you implement this into the event tabs so that it is clear when `approve()` from the `Balloons.sol` contract has been executed?
 
 ### **Checkpoint 7: 💾 Deploy it!** 🛰
 
