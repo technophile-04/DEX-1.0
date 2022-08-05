@@ -4,11 +4,11 @@ const { solidity } = require("@nomicfoundation/hardhat-chai-matchers");
 
 /**
  * @notice auto-grading tests for simpleDEX challenge
- * Stages of testing are as follows: set up global test variables, test contract deployment, deploy contracts in beforeEach(), then actually test out each 
+ * Stages of testing are as follows: set up global test variables, test contract deployment, deploy contracts in beforeEach(), then actually test out each
  * separate function.
  * @dev this is still a rough WIP. See TODO: scattered throughout.'
  * @dev additional TODO: Write edge cases; putting in zero as inputs, or whatever.
- * @dev Harshit will be producing auto-grading tests in one of the next PRs. 
+ * @dev Harshit will be producing auto-grading tests in one of the next PRs.
  */
 describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
   this.timeout(45000);
@@ -21,11 +21,11 @@ describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
 
   before(async function () {
     [deployer, user2, user3] = await ethers.getSigners();
-    
-    await deployments.fixture(['Balloons', 'DEX']);
 
-    dexContract = await ethers.getContract('DEX', deployer);
-    balloonsContract = await ethers.getContract('Balloons', deployer);
+    await deployments.fixture(["Balloons", "DEX"]);
+
+    dexContract = await ethers.getContract("DEX", deployer);
+    balloonsContract = await ethers.getContract("Balloons", deployer);
   });
 
   // quick fix to let gas reporter fetch data from gas station & coinmarketcap
@@ -43,7 +43,7 @@ describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
           let tx1 = await dexContract.ethToToken({
             value: ethers.utils.parseEther("1"),
           });
-          // TODO: SYNTAX - Figure out how to read eth balance of dex contract and to compare it against the eth sent in via this tx. Also 
+          // TODO: SYNTAX - Figure out how to read eth balance of dex contract and to compare it against the eth sent in via this tx. Also
           //figure out why/how to read the event that should be emitted with this too.
           /* Also, notice, that reference `DEX.sol` could emit *after* `return`, so that they're never emited. It's on your own to find and
           correct */
@@ -70,14 +70,16 @@ describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
       });
       describe("tokenToEth", async () => {
         it("Should send 1 $BAL to DEX in exchange for _ $ETH", async function () {
-          const balloons_bal_start = await balloonsContract.balanceOf(dexContract.address);
-          
-          let tx1 = await dexContract
-            .tokenToEth(ethers.utils.parseEther("1"));
+          const balloons_bal_start = await balloonsContract.balanceOf(
+            dexContract.address
+          );
+
+          let tx1 = await dexContract.tokenToEth(ethers.utils.parseEther("1"));
 
           //TODO: SYNTAX -  write an expect that takes into account the emitted event from tokenToETH.
-          expect(await balloonsContract.balanceOf(dexContract.address))
-            .to.equal(balloons_bal_start.add(ethers.utils.parseEther("1")));
+          expect(
+            await balloonsContract.balanceOf(dexContract.address)
+          ).to.equal(balloons_bal_start.add(ethers.utils.parseEther("1")));
         });
 
         it("Should send less eth after the first trade (tokenToEth() called)", async function () {
@@ -89,13 +91,15 @@ describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
 
           function getEthAmount(txReceipt) {
             const logDescr = dexContract.interface.parseLog(
-              txReceipt.logs.find(log => log.address == dexContract.address)
+              txReceipt.logs.find((log) => log.address == dexContract.address)
             );
             const args = logDescr.args;
-            return args[1]; // index of ethAmount in event
+            return args[2]; // index of ethAmount in event
           }
-          const ethSent_1 =  getEthAmount(tx1_receipt);
-          const ethSent_2 =  getEthAmount(tx2_receipt);
+          const ethSent_1 = getEthAmount(tx1_receipt);
+          const ethSent_2 = getEthAmount(tx2_receipt);
+          console.log(ethSent_1);
+          console.log(ethSent_2);
           expect(ethSent_2).below(ethSent_1);
         });
       });
@@ -115,8 +119,7 @@ describe("🚩 Challenge 3: ⚖️ 🪙 Simple DEX", function () {
       // pool should have 5:5 ETH:$BAL ratio
       describe("withdraw", async () => {
         it("Should withdraw 1 ETH and 1 $BAL when pool at 1:1 ratio", async function () {
-          let tx1 = await dexContract
-            .withdraw(ethers.utils.parseEther("1"));
+          let tx1 = await dexContract.withdraw(ethers.utils.parseEther("1"));
 
           // TODO: SYNTAX - Write expect() assessing changed liquidty within the pool. Should have an emitted event!
         });
